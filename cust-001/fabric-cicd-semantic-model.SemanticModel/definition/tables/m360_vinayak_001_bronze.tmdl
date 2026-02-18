@@ -1,0 +1,37 @@
+table m360_vinayak_001_bronze
+	lineageTag: 7de78dcb-b27a-4976-a465-e8d4ef7568a5
+
+	column Name
+		dataType: string
+		lineageTag: 903ffaf8-1d5b-4af2-a0ee-c122b3730c69
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: dad32a72-cb64-4ab3-b7cf-2cccf75dc430
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kind
+		dataType: string
+		lineageTag: 3efd5a7f-fcac-439a-a82c-453ad56241a8
+		summarizeBy: none
+		sourceColumn: Kind
+
+		annotation SummarizationSetBy = Automatic
+
+	partition m360_vinayak_001_bronze = m
+		mode: import
+		source =
+				let
+				  Source = Databricks.Catalogs("adb-7405618110977329.9.azuredatabricks.net", "/sql/1.0/warehouses/334a2ae248719051", [Catalog = null, Database = null, QueryTags = null, EnableAutomaticProxyDiscovery = "enabled", Implementation = "2.0", MetricViewBiCompatibilityMode = null]),
+				  #"Navigation 1" = Source{[Name = "new_db_test", Kind = "Database"]}[Data],
+				  #"Navigation 2" = #"Navigation 1"{[Name = "m360_vinayak_001_bronze", Kind = "Schema"]}[Data]
+				in
+				  #"Navigation 2"
+
