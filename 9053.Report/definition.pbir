@@ -3,7 +3,7 @@
   "version": "4.0",
   "datasetReference": {
     "byPath": {
-      "path": "../fabric-cicd-semantic-model.SemanticModel"
+      "path": "../test-9053.SemanticModel"
     }
   }
 }

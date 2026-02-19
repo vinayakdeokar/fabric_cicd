@@ -1,9 +1,9 @@
-table m360_vinayak_001_bronze
-	lineageTag: 7de78dcb-b27a-4976-a465-e8d4ef7568a5
+table m360_deokar-005_bronze
+	lineageTag: 6137dbd7-02aa-467b-9c63-58c17248aee2
 
 	column Name
 		dataType: string
-		lineageTag: 903ffaf8-1d5b-4af2-a0ee-c122b3730c69
+		lineageTag: 0219605b-e6ae-40d2-b61c-fef61c4b709d
 		summarizeBy: none
 		sourceColumn: Name
 
@@ -11,7 +11,7 @@ table m360_vinayak_001_bronze
 
 	column Description
 		dataType: string
-		lineageTag: dad32a72-cb64-4ab3-b7cf-2cccf75dc430
+		lineageTag: 48bbecfb-d307-4ab8-9254-9370110a148d
 		summarizeBy: none
 		sourceColumn: Description
 
@@ -19,19 +19,19 @@ table m360_vinayak_001_bronze
 
 	column Kind
 		dataType: string
-		lineageTag: 3efd5a7f-fcac-439a-a82c-453ad56241a8
+		lineageTag: f829611c-3ac9-4b8f-9c46-0a45713e18e9
 		summarizeBy: none
 		sourceColumn: Kind
 
 		annotation SummarizationSetBy = Automatic
 
-	partition m360_vinayak_001_bronze = m
+	partition m360_deokar-005_bronze = m
 		mode: import
 		source =
 				let
 				  Source = Databricks.Catalogs("adb-7405618110977329.9.azuredatabricks.net", "/sql/1.0/warehouses/334a2ae248719051", [Catalog = null, Database = null, QueryTags = null, EnableAutomaticProxyDiscovery = "enabled", Implementation = "2.0", MetricViewBiCompatibilityMode = null]),
-				  #"Navigation 1" = Source{[Name = "new_db_test", Kind = "Database"]}[Data],
-				  #"Navigation 2" = #"Navigation 1"{[Name = "m360_vinayak_001_bronze", Kind = "Schema"]}[Data]
+				  #"Navigation 1" = Source{[Name = "medicareadv", Kind = "Database"]}[Data],
+				  #"Navigation 2" = #"Navigation 1"{[Name = "m360_deokar-005_bronze", Kind = "Schema"]}[Data]
 				in
 				  #"Navigation 2"
 

@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "SemanticModel",
-    "displayName": "fabric-cicd-semantic-model"
+    "displayName": "test-9053"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "f61da958-7f48-96cf-4d82-eacbfc7e131f"
+    "logicalId": "5398adcf-7380-8d66-4945-bcb078a591a6"
   }
 }

@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Report",
-    "displayName": "Sales_Report_vinayak_001"
+    "displayName": "9053"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "ff3f25c3-cf38-930a-47bf-f9c080b2cefa"
+    "logicalId": "d9fb5764-ebbf-9cb7-4b7f-6e6427e884ed"
   }
 }

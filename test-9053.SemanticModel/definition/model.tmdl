@@ -6,9 +6,9 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["m360_vinayak_001_bronze","vinayak_para"]
+annotation PBI_QueryOrder = ["m360_deokar-005_bronze"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-ref table m360_vinayak_001_bronze
+ref table m360_deokar-005_bronze
 
