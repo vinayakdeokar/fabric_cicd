@@ -15,17 +15,13 @@ pipeline {
         QA_CONNECTION_ID = "ddf2b3a8-c6c4-4bf0-ac43-ee79fe113877"
     }
 
-
-    stages {
-
-        stage('Checkout') {
-            steps {
-                git branch: 'dev',
-                    credentialsId: 'github-creds',
-                    url: 'https://github.com/Prathmesh2806/Fabric-Automation.git'
-            }
+    stage('Checkout') {
+        steps {
+            git branch: 'dev',
+                credentialsId: 'github-creds',
+                url: 'https://github.com/vinayakdeokar/fabric_cicd.git'
         }
-
+    }
         stage('Debug Files') {
             steps {
                 sh 'ls -R cust-001/fabric-cicd-semantic-model.SemanticModel'
