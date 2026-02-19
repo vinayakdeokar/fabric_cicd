@@ -130,7 +130,7 @@ pipeline {
 
                     def checkJson = readJSON(text: checkRaw)
                     def modelExists = checkJson.value.find {
-                        it.id == SEMANTIC_MODEL_ID
+                        it.displayName == MODEL_NAME
                     }
 
                     if (modelExists) {
