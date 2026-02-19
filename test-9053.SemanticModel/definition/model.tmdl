@@ -1,0 +1,14 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["m360_deokar-005_bronze"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table m360_deokar-005_bronze
+

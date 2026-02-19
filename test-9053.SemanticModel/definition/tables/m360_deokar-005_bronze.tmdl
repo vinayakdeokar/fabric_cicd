@@ -1,0 +1,37 @@
+table m360_deokar-005_bronze
+	lineageTag: 96697213-0bc0-4338-a8dc-3e032a290f66
+
+	column Name
+		dataType: string
+		lineageTag: 44057f6d-4011-41b5-8e20-5f9ad3fe01da
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 79f1b4dc-12c3-40d4-bfd3-bade36035684
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kind
+		dataType: string
+		lineageTag: 59923ce8-9b29-4155-88ee-e69b23e01b07
+		summarizeBy: none
+		sourceColumn: Kind
+
+		annotation SummarizationSetBy = Automatic
+
+	partition m360_deokar-005_bronze = m
+		mode: import
+		source =
+				let
+				  Source = Databricks.Catalogs("adb-7405618110977329.9.azuredatabricks.net", "/sql/1.0/warehouses/334a2ae248719051", [Catalog = null, Database = null, QueryTags = null, EnableAutomaticProxyDiscovery = "enabled", Implementation = "2.0", MetricViewBiCompatibilityMode = null]),
+				  #"Navigation 1" = Source{[Name = "medicareadv", Kind = "Database"]}[Data],
+				  #"Navigation 2" = #"Navigation 1"{[Name = "m360_deokar-005_bronze", Kind = "Schema"]}[Data]
+				in
+				  #"Navigation 2"
+
