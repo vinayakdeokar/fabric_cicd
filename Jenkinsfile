@@ -26,6 +26,13 @@ pipeline {
             }
         }
 
+        stage('Debug Files') {
+            steps {
+                sh 'ls -R cust-001/fabric-cicd-semantic-model.SemanticModel'
+            }
+        }
+
+
         stage('Get Token') {
             steps {
                 script {
