@@ -13,6 +13,12 @@ pipeline {
 
         QA_CONNECTION_ID = "adbb9db8-da40-44c2-9cdb-1337c6f52f23"
     }
+    stage('Debug Full Repo') {
+        steps {
+            sh 'ls -R'
+        }
+    }
+
 
     stages {
 
