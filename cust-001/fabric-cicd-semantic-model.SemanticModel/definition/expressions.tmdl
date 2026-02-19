@@ -1,0 +1,5 @@
+expression vinayak_para = "10" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type text]
+	lineageTag: aebcd7d8-5b77-439e-8f9e-49815758c971
+
+	annotation PBI_ResultType = Text
+

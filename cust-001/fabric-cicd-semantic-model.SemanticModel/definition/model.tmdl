@@ -2,17 +2,13 @@ model Model
 	culture: en-US
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	sourceQueryCulture: en-US
-
 	dataAccessOptions
 		legacyRedirects
 		returnErrorValuesAsNull
 
-	// 🔵 Environment Parameter
-	expression EnvironmentName = "DEV"
-		meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type text]
-
-annotation PBI_QueryOrder = ["m360_vinayak_001_bronze"]
+annotation PBI_QueryOrder = ["m360_vinayak_001_bronze","vinayak_para"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
 ref table m360_vinayak_001_bronze
+
