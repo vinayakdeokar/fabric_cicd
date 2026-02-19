@@ -59,7 +59,7 @@ pipeline {
                     }
 
                     writeJSON file: 'model_payload.json', json: [
-                        displayName: "Sales_Model_A",
+                        displayName: "fabric-cicd-semantic-model",
                         type: "SemanticModel",
                         definition: [parts: parts]
                     ]
