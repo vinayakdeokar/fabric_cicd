@@ -92,51 +92,53 @@ pipeline {
         stage('Deploy To QA Workspace') {
             steps {
                 script {
-
+        
                     def checkRaw = sh(script: """
                         curl -s \
                         -H 'Authorization: Bearer ${env.TOKEN}' \
                         https://api.fabric.microsoft.com/v1/workspaces/${QA_WORKSPACE_ID}/items
                     """, returnStdout: true)
-
+        
                     def checkJson = readJSON(text: checkRaw)
-
-                    def modelExists = checkJson.value.find {
+        
+                    def existingModel = checkJson.value.find {
                         it.displayName == MODEL_NAME
                     }
-
-                    if (modelExists) {
-
-                        env.QA_MODEL_ID = modelExists.id
-
-                        echo "Updating existing model ID: ${env.QA_MODEL_ID}"
-
+        
+                    if (existingModel) {
+        
+                        def QA_MODEL_ID = existingModel.id
+                        echo "Updating existing model: ${QA_MODEL_ID}"
+        
                         sh """
                             curl -s -X POST \
-                            https://api.fabric.microsoft.com/v1/workspaces/${QA_WORKSPACE_ID}/items/${env.QA_MODEL_ID}/updateDefinition \
+                            https://api.fabric.microsoft.com/v1/workspaces/${QA_WORKSPACE_ID}/items/${QA_MODEL_ID}/updateDefinition \
                             -H 'Authorization: Bearer ${env.TOKEN}' \
                             -H 'Content-Type: application/json' \
                             -d @model_payload.json
                         """
-
+        
+                        env.SEMANTIC_MODEL_ID = QA_MODEL_ID
+        
                     } else {
-
+        
                         echo "Creating new model..."
-
-                        def createResp = sh(script: """
+        
+                        def createRaw = sh(script: """
                             curl -s -X POST \
                             https://api.fabric.microsoft.com/v1/workspaces/${QA_WORKSPACE_ID}/items \
                             -H 'Authorization: Bearer ${env.TOKEN}' \
                             -H 'Content-Type: application/json' \
                             -d @model_payload.json
                         """, returnStdout: true)
-
-                        def createJson = readJSON(text: createResp)
-                        env.QA_MODEL_ID = createJson.id
+        
+                        def createJson = readJSON(text: createRaw)
+                        env.SEMANTIC_MODEL_ID = createJson.id
                     }
                 }
             }
         }
+
 
         stage('QA TakeOver') {
             steps {
