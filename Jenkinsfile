@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        CLIENT_ID        = credentials('fabric-client-id')
-        CLIENT_SECRET    = credentials('fabric-client-secret')
-        TENANT_ID        = credentials('fabric-tenant-id')
+        CLIENT_ID        = 5edcfcf8-9dbd-4c1b-a602-a0887f677e2e
+        CLIENT_SECRET    = _5S8Q~g5IB33yW~tq9lPokpO1pL~V-pHpMP-hbMr
+        TENANT_ID        = 6fbff720-d89b-4675-b188-48491f24b460
 
         DEV_WORKSPACE_ID = "91c74549-7e98-4088-a9a0-0855c9c3b466"
         QA_WORKSPACE_ID  = "dd03f00e-302f-42c9-99d8-8bcb92687612"
