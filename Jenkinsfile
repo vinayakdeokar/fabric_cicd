@@ -10,8 +10,8 @@ pipeline {
         QA_WORKSPACE_ID  = "dd03f00e-302f-42c9-99d8-8bcb92687612"
     
         SEMANTIC_MODEL_ID = "5bd5e7ae-95ff-4251-8fd3-f6d14fa8439c"
-        MODEL_FOLDER      = "Customer-A/Sales_Model_A.SemanticModel"
-    
+        MODEL_FOLDER = "cust-001/fabric-cicd-semantic-model.SemanticModel"
+        
         QA_CONNECTION_ID = "ddf2b3a8-c6c4-4bf0-ac43-ee79fe113877"
     }
 
