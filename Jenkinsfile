@@ -66,35 +66,62 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy To QA Workspace') {
             steps {
                 script {
-
-                    def responseHeaders = sh(script: """
-                        curl -i -s -X POST \
-                        https://api.fabric.microsoft.com/v1/workspaces/${QA_WORKSPACE_ID}/items/${SEMANTIC_MODEL_ID}/updateDefinition \
-                        -H 'Authorization: Bearer ${env.TOKEN}' \
-                        -H 'Content-Type: application/json' \
-                        -d @model_payload.json
+        
+                    // 1️⃣ Check if model exists
+                    def checkRaw = sh(script: """
+                        curl -s -H 'Authorization: Bearer ${env.TOKEN}' \
+                        https://api.fabric.microsoft.com/v1/workspaces/${QA_WORKSPACE_ID}/items
                     """, returnStdout: true)
-
-                    def opUrl = sh(script: "echo '${responseHeaders}' | grep -i 'location:' | awk '{print \$2}' | tr -d '\\r'", returnStdout: true).trim()
-
-                    if (!opUrl) error "❌ QA Deployment did not start."
-
-                    while (true) {
-                        sleep 15
-                        def statusRaw = sh(script: "curl -s -H 'Authorization: Bearer ${env.TOKEN}' ${opUrl}", returnStdout: true)
-                        def statusJson = readJSON(text: statusRaw)
-
-                        if (statusJson.status == "Succeeded") break
-                        if (statusJson.status == "Failed") error "❌ QA Deployment Failed: ${statusRaw}"
+        
+                    def checkJson = readJSON(text: checkRaw)
+                    def modelExists = checkJson.value.find { it.id == SEMANTIC_MODEL_ID }
+        
+                    if (modelExists) {
+        
+                        echo "🔄 Model exists in QA → Updating definition"
+        
+                        def responseHeaders = sh(script: """
+                            curl -i -s -X POST \
+                            https://api.fabric.microsoft.com/v1/workspaces/${QA_WORKSPACE_ID}/items/${SEMANTIC_MODEL_ID}/updateDefinition \
+                            -H 'Authorization: Bearer ${env.TOKEN}' \
+                            -H 'Content-Type: application/json' \
+                            -d @model_payload.json
+                        """, returnStdout: true)
+        
+                        def opUrl = sh(script: "echo '${responseHeaders}' | grep -i 'location:' | awk '{print \$2}' | tr -d '\\r'", returnStdout: true).trim()
+        
+                        if (!opUrl) error "❌ Update operation did not start."
+        
+                        while (true) {
+                            sleep 15
+                            def statusRaw = sh(script: "curl -s -H 'Authorization: Bearer ${env.TOKEN}' ${opUrl}", returnStdout: true)
+                            def statusJson = readJSON(text: statusRaw)
+        
+                            if (statusJson.status == "Succeeded") break
+                            if (statusJson.status == "Failed") error "❌ QA Update Failed: ${statusRaw}"
+                        }
+        
+                    } else {
+        
+                        echo "🆕 Model not found in QA → Creating new"
+        
+                        sh """
+                            curl -s -X POST \
+                            https://api.fabric.microsoft.com/v1/workspaces/${QA_WORKSPACE_ID}/items \
+                            -H 'Authorization: Bearer ${env.TOKEN}' \
+                            -H 'Content-Type: application/json' \
+                            -d @model_payload.json
+                        """
                     }
                 }
             }
         }
 
+
+        
         stage('QA TakeOver') {
             steps {
                 sh """
